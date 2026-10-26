@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+# Refresh the app screenshots on the page from a Maestro plugin checkout.
+#
+#   tools/refresh-screenshots ~/src/omarchy-maestro
+#
+# Reads docs/screenshots/*.png from the checkout and rebuilds the WebP sizes and PNG
+# fallbacks in assets/img/. Other images are left alone. Undo with:
+#   git checkout -- assets/img
+set -euo pipefail
+
+if [[ $# -ne 1 || $1 == -h || $1 == --help ]]; then
+  printf 'Usage: %s PLUGIN_CHECKOUT\n' "$(basename "$0")" >&2
+  exit 2
+fi
+
+tools="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+plugin="$(cd "$1" && pwd)"
+
+if [[ ! -d $plugin/docs/screenshots ]]; then
+  printf 'No docs/screenshots folder in %s\n' "$plugin" >&2
+  exit 1
+fi
+
+python3 "$tools/build_images.py" --plugin "$plugin" --only screenshots
+printf 'Screenshots refreshed from %s (%s).\n' "$plugin" \
+  "$(git -C "$plugin" describe --tags --always --dirty 2>/dev/null || echo 'not a git checkout')"
+printf 'Review with: git -C %q status --short assets/img\n' "$(dirname "$tools")"

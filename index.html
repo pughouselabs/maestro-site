@@ -1,0 +1,614 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Maestro: settings for Logitech MX mice on Omarchy</title>
+<meta name="description" content="Maestro is a free, open-source settings app, bar widget and background service for Logitech MX mice on Omarchy. Remap buttons, set up gestures and per-app profiles, and keep pointer settings after sleep.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#f7f8fa" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0b0d10" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://pughouselabs.github.io/maestro-site/">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Maestro by Pughouse Labs">
+<meta property="og:title" content="Maestro: your MX mouse, at home on Omarchy">
+<meta property="og:description" content="Buttons, gestures, per-app profiles and pointer settings for Logitech MX mice on Omarchy. Free and open source.">
+<meta property="og:url" content="https://pughouselabs.github.io/maestro-site/">
+<meta property="og:image" content="https://pughouselabs.github.io/maestro-site/assets/img/og-card.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Maestro wordmark beside a Logitech MX Master 2S render">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Maestro: your MX mouse, at home on Omarchy">
+<meta name="twitter:description" content="Buttons, gestures, per-app profiles and pointer settings for Logitech MX mice on Omarchy. Free and open source.">
+<meta name="twitter:image" content="https://pughouselabs.github.io/maestro-site/assets/img/og-card.jpg">
+<meta name="twitter:image:alt" content="Maestro wordmark beside a Logitech MX Master 2S render">
+<script>
+  (function () {
+    try {
+      var t = localStorage.getItem("maestro-theme");
+      if (t === "light" || t === "dark") document.documentElement.dataset.theme = t;
+    } catch (e) {}
+  })();
+</script>
+<link rel="stylesheet" href="assets/site.css">
+<link rel="preload" as="image" type="image/webp" href="assets/img/hero-dark-960.webp" imagesrcset="assets/img/hero-dark-640.webp 640w, assets/img/hero-dark-960.webp 960w, assets/img/hero-dark-1400.webp 1400w" imagesizes="(min-width: 1200px) 1000px, 92vw" media="(prefers-color-scheme: dark)" fetchpriority="high">
+<link rel="preload" as="image" type="image/webp" href="assets/img/hero-light-960.webp" imagesrcset="assets/img/hero-light-640.webp 640w, assets/img/hero-light-960.webp 960w, assets/img/hero-light-1400.webp 1400w" imagesizes="(min-width: 1200px) 1000px, 92vw" media="(prefers-color-scheme: light)" fetchpriority="high">
+</head>
+<body>
+<svg class="sprite" aria-hidden="true" focusable="false">
+  <symbol id="i-mouse" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="6"/><path d="M12 2v7M6 10h12"/></symbol>
+  <symbol id="i-battery" viewBox="0 0 24 24"><rect x="2" y="7" width="18" height="10" rx="2"/><path d="M23 10v4M5 10h10v4H5z"/></symbol>
+  <symbol id="i-gesture" viewBox="0 0 24 24"><path d="M8 13V5a2 2 0 0 1 4 0v6-2a2 2 0 0 1 4 0v3-1a2 2 0 0 1 4 0v5c0 4-3 6-6 6H9l-6-8a2 2 0 0 1 3-2l2 2"/></symbol>
+  <symbol id="i-keyboard" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M6 9h1m4 0h1m4 0h1M6 12h1m4 0h1m4 0h1M7 16h10"/></symbol>
+  <symbol id="i-routine" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M7 8h10M7 12h10M7 16h4m3-2 3 2-3 2z"/></symbol>
+  <symbol id="i-apps" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 8a8 8 0 1 0 1 7M20 3v5h-5"/></symbol>
+  <symbol id="i-backup" viewBox="0 0 24 24"><path d="M3 10a9 9 0 1 1 1 7M3 4v6h6M12 7v5l3 2"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="13" height="13" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+  <symbol id="i-external" viewBox="0 0 24 24"><path d="M14 3h7v7m0-7L10 14m0-10H5a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h13a2 2 0 0 0 2-2v-5"/></symbol>
+  <symbol id="i-bar" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="M2 9h20M15 6.5h4"/></symbol>
+  <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></symbol>
+  <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11 12 4l9 7M5 10v10h14V10"/></symbol>
+  <symbol id="i-cloud-off" viewBox="0 0 24 24"><path d="M3 3l18 18M8 7.5A6 6 0 0 1 17.6 10 4 4 0 0 1 20 17M17 18H7a5 5 0 0 1-2.5-9.3"/></symbol>
+  <symbol id="i-user-off" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 13-6.2M3 3l18 18"/></symbol>
+  <symbol id="i-eye-off" viewBox="0 0 24 24"><path d="M3 3l18 18M10.6 6.1A10 10 0 0 1 12 6c5 0 9 6 9 6a17 17 0 0 1-2.6 3.2M6.6 7.6A17 17 0 0 0 3 12s4 6 9 6a9 9 0 0 0 4.1-1"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></symbol>
+  <symbol id="i-code" viewBox="0 0 24 24"><path d="m8 7-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M9 14h1m4 0h1M9 17h6"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-github" viewBox="0 0 24 24"><path d="M9 19c-4 1.5-4-2-6-2.5m12 5v-3.5a3 3 0 0 0-.9-2.4c3-.3 6-1.5 6-6.6a5 5 0 0 0-1.4-3.6 4.7 4.7 0 0 0-.1-3.5s-1.1-.4-3.7 1.4a12.6 12.6 0 0 0-6.6 0C5.7 1.5 4.6 1.9 4.6 1.9a4.7 4.7 0 0 0-.1 3.5A5 5 0 0 0 3 9c0 5.1 3 6.3 6 6.6a3 3 0 0 0-.9 2.3V22"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></symbol>
+</svg>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav" id="top">
+  <div class="nav-inner wrap">
+    <a class="brand" href="#top" aria-label="Maestro, back to top">
+      <img src="assets/img/favicon.svg" width="28" height="28" alt="">
+      <span>Maestro</span>
+    </a>
+    <nav aria-label="Sections">
+      <ul class="nav-links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#gestures">Gestures</a></li>
+        <li><a href="#smart-actions">Smart Actions</a></li>
+        <li><a href="#privacy">Privacy</a></li>
+        <li><a href="#devices">Devices</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </nav>
+    <div class="nav-actions">
+      <button class="icon-btn" type="button" id="theme-toggle" aria-label="Switch to dark theme">
+        <svg class="ico ico-sun" aria-hidden="true"><use href="#i-sun"/></svg>
+        <svg class="ico ico-moon" aria-hidden="true"><use href="#i-moon"/></svg>
+      </button>
+      <a class="btn btn-small" href="#install">Install</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="hero" aria-labelledby="hero-title">
+  <div class="wrap hero-copy">
+    <p class="eyebrow">For Logitech MX mice on Omarchy</p>
+    <h1 id="hero-title">Your MX mouse,<br>at home on Omarchy.</h1>
+    <p class="lede">Maestro is a settings app, bar widget and background service for Logitech MX mice. Remap buttons, set up gestures and per-app profiles, and keep your pointer settings through sleep and reconnects. Free and open source.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#install" data-copy="omarchy plugin install https://github.com/pughouselabs/omarchy-maestro --enable">
+        <svg class="ico" aria-hidden="true"><use href="#i-copy"/></svg>
+        <span class="btn-label">Install for Omarchy</span>
+      </a>
+      <a class="btn btn-ghost" href="https://github.com/pughouselabs/omarchy-maestro">
+        <svg class="ico" aria-hidden="true"><use href="#i-github"/></svg>
+        View on GitHub
+      </a>
+    </div>
+    <div class="cmd" role="group" aria-label="Install command">
+      <code><span class="prompt" aria-hidden="true">$</span> omarchy plugin install https://github.com/pughouselabs/omarchy-maestro --enable</code>
+      <button class="cmd-copy" type="button" data-copy="omarchy plugin install https://github.com/pughouselabs/omarchy-maestro --enable" aria-label="Copy install command">
+        <svg class="ico" aria-hidden="true"><use href="#i-copy"/></svg>
+      </button>
+    </div>
+    <p class="hero-meta">MIT license <span aria-hidden="true">·</span> No account <span aria-hidden="true">·</span> Tested on MX Master 2S</p>
+  </div>
+  <div class="hero-art wrap">
+    <picture data-themed>
+      <source data-for="dark" media="(prefers-color-scheme: dark)" type="image/webp" srcset="assets/img/hero-dark-640.webp 640w, assets/img/hero-dark-960.webp 960w, assets/img/hero-dark-1400.webp 1400w" sizes="(min-width: 1200px) 1000px, 92vw">
+      <source data-for="light" type="image/webp" srcset="assets/img/hero-light-640.webp 640w, assets/img/hero-light-960.webp 960w, assets/img/hero-light-1400.webp 1400w" sizes="(min-width: 1200px) 1000px, 92vw">
+      <img src="assets/img/hero-light-960.png" width="1400" height="1027" fetchpriority="high" decoding="async" alt="Logitech MX Master 2S seen from above and to the side, showing the scroll wheel, thumb wheel and side buttons">
+    </picture>
+  </div>
+</section>
+
+<section class="section" id="features" aria-labelledby="features-title">
+  <div class="wrap">
+    <header class="section-head">
+      <p class="eyebrow">What it does</p>
+      <h2 id="features-title">Every setting your mouse has, in one place.</h2>
+      <p class="section-lede">Maestro talks to the mouse directly over Logitech's HID++ protocol. It reads what your mouse supports at runtime and only shows controls that will work.</p>
+    </header>
+    <ul class="feature-grid">
+      <li class="card">
+        <svg class="ico ico-lg" aria-hidden="true"><use href="#i-bar"/></svg>
+        <h3>Bar widget</h3>
+        <p>Battery level and charging state in the Omarchy bar. Click it for DPI presets, wheel mode, SmartShift and scroll direction.</p>
+      </li>
+      <li class="card">
+        <svg class="ico ico-lg" aria-hidden="true"><use href="#i-mouse"/></svg>
+        <h3>Clickable mouse map</h3>
+        <p>The settings app shows your mouse with a numbered dot on each control. Choose a dot to change what that button does.</p>
+      </li>
+      <li class="card">
+        <svg class="ico ico-lg" aria-hidden="true"><use href="#i-gesture"/></svg>
+        <h3>Gesture button</h3>
+        <p>Hold the thumb button and move the mouse. Pick a preset for windows, workspaces, media or zoom, or set each direction yourself.</p>
+      </li>
+      <li class="card">
+        <svg class="ico ico-lg" aria-hidden="true"><use href="#i-keyboard"/></svg>
+        <h3>Buttons and shortcuts</h3>
+        <p>Assign any keyboard shortcut, mouse click, Omarchy or Hyprland action, or a program to launch. Record a shortcut by pressing it.</p>
+      </li>
+      <li class="card">
+        <svg class="ico ico-lg" aria-hidden="true"><use href="#i-routine"/></svg>
+        <h3>Smart Actions</h3>
+        <p>Chain shortcuts, typed text, delays and commands into one routine, try it, then put it on a button or gesture.</p>
+      </li>
+      <li class="card">
+        <svg class="ico ico-lg" aria-hidden="true"><use href="#i-apps"/></svg>
+        <h3>Per-app profiles</h3>
+        <p>Different buttons, gestures and thumb wheel in each app. Maestro follows the focused Hyprland window and switches for you.</p>
+      </li>
+      <li class="card">
+        <svg class="ico ico-lg" aria-hidden="true"><use href="#i-sliders"/></svg>
+        <h3>Point and scroll</h3>
+        <p>Pointer speed (DPI), SmartShift threshold, ratchet or free-spin wheel, and natural scrolling, using the values your mouse reports.</p>
+      </li>
+      <li class="card">
+        <svg class="ico ico-lg" aria-hidden="true"><use href="#i-refresh"/></svg>
+        <h3>Restored after sleep</h3>
+        <p>The background service reapplies your settings and button mappings when the mouse wakes, reconnects or the receiver resets.</p>
+      </li>
+      <li class="card">
+        <svg class="ico ico-lg" aria-hidden="true"><use href="#i-battery"/></svg>
+        <h3>Battery at a glance</h3>
+        <p>Percent, charging mark and a warning color at 15% or less. An asleep or missing mouse shows a dimmed icon.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="section section-tint" id="tour" aria-labelledby="tour-title">
+  <div class="wrap">
+    <header class="section-head">
+      <p class="eyebrow">The settings app</p>
+      <h2 id="tour-title">Made for the way Omarchy looks and works.</h2>
+      <p class="section-lede">A compact window that opens from the launcher or the bar, follows your Omarchy theme, and saves every change as you make it, with Undo one click away.</p>
+    </header>
+    <div class="tabs" data-tabs>
+      <div class="tablist" role="tablist" aria-label="App screens">
+        <button role="tab" type="button" id="tab-buttons" aria-controls="panel-buttons" aria-selected="true">Buttons</button>
+        <button role="tab" type="button" id="tab-gestures" aria-controls="panel-gestures" aria-selected="false" tabindex="-1">Gestures</button>
+        <button role="tab" type="button" id="tab-smart" aria-controls="panel-smart" aria-selected="false" tabindex="-1">Smart Actions</button>
+        <button role="tab" type="button" id="tab-home" aria-controls="panel-home" aria-selected="false" tabindex="-1">Your devices</button>
+      </div>
+      <div class="tabpanel" role="tabpanel" id="panel-buttons" aria-labelledby="tab-buttons" tabindex="0">
+        <figure class="display">
+          <div class="screen">
+            <picture data-themed>
+              <source data-for="dark" media="(prefers-color-scheme: dark)" type="image/webp" srcset="assets/img/shot-device-800.webp 800w, assets/img/shot-device-1600.webp 1600w" sizes="(min-width: 1200px) 1080px, 94vw">
+              <source data-for="light" type="image/webp" srcset="assets/img/shot-device-light-800.webp 800w, assets/img/shot-device-light-1600.webp 1600w" sizes="(min-width: 1200px) 1080px, 94vw">
+              <img src="assets/img/shot-device-light-1600.png" width="1600" height="1000" loading="lazy" decoding="async" alt="Maestro's Buttons screen: an MX Master 2S with six numbered controls, each labeled with its current assignment, such as Gestures on the gesture button and Ctrl plus C on Back">
+            </picture>
+          </div>
+          <figcaption>Buttons: choose a numbered dot or its label to open the action list.</figcaption>
+        </figure>
+      </div>
+      <div class="tabpanel" role="tabpanel" id="panel-gestures" aria-labelledby="tab-gestures" tabindex="0" hidden>
+        <figure class="display">
+          <div class="screen">
+            <picture data-themed>
+              <source data-for="dark" media="(prefers-color-scheme: dark)" type="image/webp" srcset="assets/img/shot-gesture-panel-800.webp 800w, assets/img/shot-gesture-panel-1600.webp 1600w" sizes="(min-width: 1200px) 1080px, 94vw">
+              <source data-for="light" type="image/webp" srcset="assets/img/shot-gesture-panel-light-800.webp 800w, assets/img/shot-gesture-panel-light-1600.webp 1600w" sizes="(min-width: 1200px) 1080px, 94vw">
+              <img src="assets/img/shot-gesture-panel-light-1600.png" width="1600" height="1000" loading="lazy" decoding="async" alt="Maestro's gesture button panel with the Window navigation preset: up for full screen, left and right for workspaces, down for the Omarchy menu and tap to switch applications">
+            </picture>
+          </div>
+          <figcaption>Gestures: a preset, a direction cross you can edit, and an adjustable movement distance.</figcaption>
+        </figure>
+      </div>
+      <div class="tabpanel" role="tabpanel" id="panel-smart" aria-labelledby="tab-smart" tabindex="0" hidden>
+        <figure class="display">
+          <div class="screen">
+            <picture data-themed>
+              <source data-for="dark" media="(prefers-color-scheme: dark)" type="image/webp" srcset="assets/img/shot-smart-actions-800.webp 800w, assets/img/shot-smart-actions-1600.webp 1600w" sizes="(min-width: 1200px) 1080px, 94vw">
+              <source data-for="light" type="image/webp" srcset="assets/img/shot-smart-actions-light-800.webp 800w, assets/img/shot-smart-actions-light-1600.webp 1600w" sizes="(min-width: 1200px) 1080px, 94vw">
+              <img src="assets/img/shot-smart-actions-light-1600.png" width="1600" height="1000" loading="lazy" decoding="async" alt="Maestro's Smart Actions screen listing a Paste and send routine assigned to Back, above four templates">
+            </picture>
+          </div>
+          <figcaption>Smart Actions: your routines and where they are assigned, above ready-made templates.</figcaption>
+        </figure>
+      </div>
+      <div class="tabpanel" role="tabpanel" id="panel-home" aria-labelledby="tab-home" tabindex="0" hidden>
+        <figure class="display">
+          <div class="screen">
+            <picture data-themed>
+              <source data-for="dark" media="(prefers-color-scheme: dark)" type="image/webp" srcset="assets/img/shot-home-800.webp 800w, assets/img/shot-home-1600.webp 1600w" sizes="(min-width: 1200px) 1080px, 94vw">
+              <source data-for="light" type="image/webp" srcset="assets/img/shot-home-light-800.webp 800w, assets/img/shot-home-light-1600.webp 1600w" sizes="(min-width: 1200px) 1080px, 94vw">
+              <img src="assets/img/shot-home-light-1600.png" width="1600" height="1000" loading="lazy" decoding="async" alt="Maestro's home screen showing a connected MX Master 2S with its battery level and connection">
+            </picture>
+          </div>
+          <figcaption>Your devices: every connected MX mouse, its battery and how it is connected.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="themes" aria-labelledby="themes-title">
+  <div class="wrap split">
+    <div class="split-copy">
+      <p class="eyebrow">Light and dark</p>
+      <h2 id="themes-title">Follows your Omarchy theme.</h2>
+      <p>Maestro reads the colors of your current Omarchy theme and updates when you switch. Text and controls were checked for contrast against all 22 themes that ship with Omarchy.</p>
+      <ul class="checks">
+        <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Opens from the app launcher or from <strong>Open Maestro</strong> in the bar panel</li>
+        <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Keyboard focus rings and labels on every control</li>
+        <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Optional Hyprland rule that centers the window</li>
+      </ul>
+    </div>
+    <div class="theme-pair" aria-label="The Buttons screen in dark and light themes" role="img">
+      <figure class="display display-sm pair-back">
+        <div class="screen">
+          <picture>
+            <source type="image/webp" srcset="assets/img/shot-device-light-800.webp">
+            <img src="assets/img/shot-device-light-1600.png" width="1600" height="1000" loading="lazy" decoding="async" alt="">
+          </picture>
+        </div>
+      </figure>
+      <figure class="display display-sm pair-front">
+        <div class="screen">
+          <picture>
+            <source type="image/webp" srcset="assets/img/shot-device-800.webp">
+            <img src="assets/img/shot-device-1600.png" width="1600" height="1000" loading="lazy" decoding="async" alt="">
+          </picture>
+        </div>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="section section-tint" id="buttons" aria-labelledby="buttons-title">
+  <div class="wrap split split-reverse">
+    <div class="split-copy">
+      <p class="eyebrow">Buttons</p>
+      <h2 id="buttons-title">Six controls. Any action you want.</h2>
+      <p>Choose a control and search the action catalog, record a keyboard shortcut, pick a Smart Action, or enter a program and its arguments. <strong>Try it</strong> runs the action right away so you can check it before you move on.</p>
+      <dl class="spec-list">
+        <div><dt>Catalog</dt><dd>Omarchy, windows and workspaces, media, browser, editing, zoom and mouse clicks</dd></div>
+        <div><dt>Shortcuts</dt><dd>Letters, numbers, F1 to F24, arrows and media keys with Ctrl, Alt, Shift and Super</dd></div>
+        <div><dt>Commands</dt><dd>Run directly with their arguments, never through a shell</dd></div>
+        <div><dt>Default</dt><dd>Any button can stay native. Held keys and clicks stay held, so middle-button drags still work</dd></div>
+      </dl>
+    </div>
+    <div class="split-art">
+      <picture>
+        <source type="image/webp" srcset="assets/img/thumb-480.webp 480w, assets/img/thumb-800.webp 800w" sizes="(min-width: 900px) 460px, 80vw">
+        <img src="assets/img/thumb-800.png" width="800" height="800" loading="lazy" decoding="async" alt="Close view of the MX Master 2S thumb area with the thumb wheel and the back and forward buttons">
+      </picture>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="gestures" aria-labelledby="gestures-title">
+  <div class="wrap">
+    <header class="section-head">
+      <p class="eyebrow">Gesture button</p>
+      <h2 id="gestures-title">Hold, move, release.</h2>
+      <p class="section-lede">Hold the thumb button and move the mouse in a direction, then let go. A tap without moving runs the center action. The first direction to pass the movement distance wins, and you can change that distance.</p>
+    </header>
+    <div class="presets" role="group" aria-label="Gesture presets">
+      <button type="button" class="chip" data-preset="windows" aria-pressed="true">Window navigation</button>
+      <button type="button" class="chip" data-preset="workspaces" aria-pressed="false">Workspaces</button>
+      <button type="button" class="chip" data-preset="media" aria-pressed="false">Media</button>
+      <button type="button" class="chip" data-preset="zoom" aria-pressed="false">Zoom</button>
+      <button type="button" class="chip" data-preset="custom" aria-pressed="false">Custom</button>
+    </div>
+    <div class="gesture" aria-live="polite">
+      <div class="g-dir g-up"><svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg><span class="g-key">Up</span><span class="g-act" data-dir="up">Full screen</span></div>
+      <div class="g-dir g-left"><svg class="ico rot-l" aria-hidden="true"><use href="#i-arrow"/></svg><span class="g-key">Left</span><span class="g-act" data-dir="left">Previous workspace</span></div>
+      <div class="g-mouse">
+        <picture>
+          <source type="image/webp" srcset="assets/img/top-down-360.webp 360w, assets/img/top-down-560.webp 560w" sizes="(min-width: 900px) 280px, 42vw">
+          <img src="assets/img/top-down-560.png" width="560" height="851" loading="lazy" decoding="async" alt="MX Master 2S seen from directly above">
+        </picture>
+        <div class="g-tap"><span class="g-key">Tap</span><span class="g-act" data-dir="tap">Switch applications</span></div>
+      </div>
+      <div class="g-dir g-right"><svg class="ico rot-r" aria-hidden="true"><use href="#i-arrow"/></svg><span class="g-key">Right</span><span class="g-act" data-dir="right">Next workspace</span></div>
+      <div class="g-dir g-down"><svg class="ico rot-d" aria-hidden="true"><use href="#i-arrow"/></svg><span class="g-key">Down</span><span class="g-act" data-dir="down">Omarchy menu</span></div>
+    </div>
+    <p class="note">Workspace, window and fullscreen actions go through Hyprland. Choosing a gesture preset replaces a single action on that button, and assigning a single action turns gestures off.</p>
+  </div>
+</section>
+
+<section class="section section-tint" id="smart-actions" aria-labelledby="smart-title">
+  <div class="wrap">
+    <header class="section-head">
+      <p class="eyebrow">Smart Actions</p>
+      <h2 id="smart-title">One button, several steps.</h2>
+      <p class="section-lede">Build a routine from keyboard shortcuts, typed text, delays, commands, catalog actions and mouse clicks. Drag steps into order, try the routine, then choose <strong>Assign to a button</strong>. Start from a template or from scratch.</p>
+    </header>
+    <ul class="template-grid">
+      <li class="card template">
+        <h3>Paste and send</h3>
+        <p>Paste the clipboard, then submit.</p>
+        <ol class="steps">
+          <li><kbd>Ctrl</kbd> + <kbd>V</kbd></li>
+          <li>Wait 150 ms</li>
+          <li><kbd>Enter</kbd></li>
+        </ol>
+      </li>
+      <li class="card template">
+        <h3>Screenshot region</h3>
+        <p>Select and copy a screen region.</p>
+        <ol class="steps">
+          <li>Run <code>omarchy capture screenshot region copy</code></li>
+        </ol>
+      </li>
+      <li class="card template">
+        <h3>Morning apps</h3>
+        <p>Open the browser and terminal.</p>
+        <ol class="steps">
+          <li>Run <code>omarchy launch browser</code></li>
+          <li>Run <code>omarchy launch terminal</code></li>
+        </ol>
+      </li>
+      <li class="card template">
+        <h3>Mute and lock</h3>
+        <p>Mute the output and lock the desktop.</p>
+        <ol class="steps">
+          <li>Mute the default audio output</li>
+          <li>Run <code>omarchy system lock</code></li>
+        </ol>
+      </li>
+    </ul>
+    <p class="note">Routines run one at a time per trigger, up to 50 steps and 30 seconds. Disconnecting the mouse or stopping the service cancels a running routine and releases any held keys.</p>
+  </div>
+</section>
+
+<section class="section" id="profiles" aria-labelledby="profiles-title">
+  <div class="wrap trio">
+    <article class="panel">
+      <svg class="ico ico-lg" aria-hidden="true"><use href="#i-apps"/></svg>
+      <h2 id="profiles-title">Per-app profiles</h2>
+      <p>Choose <strong>Add application</strong> to give an app its own buttons, gestures and thumb wheel. Open windows are listed first, with their icons. Anything you leave unset stays the same as All applications.</p>
+      <p class="fine">Profiles match the Hyprland window class and, optionally, its title. The first matching profile wins. A profile switch waits for held buttons to be released.</p>
+    </article>
+    <article class="panel">
+      <svg class="ico ico-lg" aria-hidden="true"><use href="#i-target"/></svg>
+      <h2>Point and scroll</h2>
+      <p>Pick a DPI value your mouse supports, set the SmartShift threshold, switch between ratchet and free-spin, and turn natural scrolling on or off. Changes apply to that mouse in every app.</p>
+      <p class="fine">On mice that report a programmable thumb wheel, it can control volume, zoom, tabs or workspaces. Other mice keep native horizontal scrolling and the app explains why.</p>
+    </article>
+    <article class="panel">
+      <svg class="ico ico-lg" aria-hidden="true"><use href="#i-refresh"/></svg>
+      <h2>Survives sleep</h2>
+      <p>The background service reapplies DPI, SmartShift, scroll direction and button mappings after the mouse wakes or reconnects, and checks every few seconds in case a wake event is missed.</p>
+      <p class="fine">Stop the service and it releases every remapped control. Your pointer settings stay as they are.</p>
+    </article>
+  </div>
+</section>
+
+<section class="section section-tint" id="privacy" aria-labelledby="privacy-title">
+  <div class="wrap">
+    <header class="section-head">
+      <p class="eyebrow">Privacy and trust</p>
+      <h2 id="privacy-title">Your mouse, your machine, your files.</h2>
+      <p class="section-lede">Maestro has no servers to talk to. Everything it does happens between your computer and your mouse.</p>
+    </header>
+    <ul class="trust-grid">
+      <li><svg class="ico ico-lg" aria-hidden="true"><use href="#i-cloud-off"/></svg><h3>Local only</h3><p>No network connections. Settings are sent to the mouse over its own receiver or Bluetooth link.</p></li>
+      <li><svg class="ico ico-lg" aria-hidden="true"><use href="#i-user-off"/></svg><h3>No account</h3><p>Nothing to sign up for or sign in to. It runs as your desktop user, never as root.</p></li>
+      <li><svg class="ico ico-lg" aria-hidden="true"><use href="#i-eye-off"/></svg><h3>No telemetry</h3><p>No usage tracking, analytics or crash reporting. Device reports leave serial numbers out.</p></li>
+      <li><svg class="ico ico-lg" aria-hidden="true"><use href="#i-code"/></svg><h3>Open source</h3><p>MIT licensed, written in Python using only its standard library. Read every line on GitHub.</p></li>
+      <li><svg class="ico ico-lg" aria-hidden="true"><use href="#i-file"/></svg><h3>Readable config</h3><p>One JSON file at <code>~/.config/maestro/config.json</code>, checked in full before anything is saved.</p></li>
+      <li><svg class="ico ico-lg" aria-hidden="true"><use href="#i-backup"/></svg><h3>Backups and Undo</h3><p>Every change keeps a backup. Undo the last change in one click, or restore any of the last 20 copies.</p></li>
+      <li><svg class="ico ico-lg" aria-hidden="true"><use href="#i-shield"/></svg><h3>Mice only</h3><p>On a receiver shared with a keyboard, Maestro sends commands only to the mouse.</p></li>
+      <li><svg class="ico ico-lg" aria-hidden="true"><use href="#i-mouse"/></svg><h3>No vendor software</h3><p>No Logitech app and no cloud sign-in. Maestro speaks HID++ itself, without Solaar or logiops.</p></li>
+    </ul>
+  </div>
+</section>
+
+<section class="section" id="devices" aria-labelledby="devices-title">
+  <div class="wrap">
+    <header class="section-head">
+      <p class="eyebrow">Supported devices</p>
+      <h2 id="devices-title">Built for the MX family. Tested on the MX Master 2S.</h2>
+      <p class="section-lede">Maestro discovers each mouse's features at runtime instead of relying on a fixed list. Only the MX Master 2S on a Unifying receiver has been tested on real hardware so far. The other mice are expected to work and need testers.</p>
+    </header>
+    <div class="table-wrap" role="region" aria-labelledby="devices-title" tabindex="0">
+      <table class="devices">
+        <thead>
+          <tr><th scope="col">Mouse</th><th scope="col">Connection</th><th scope="col">Status</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">MX Master 2S</th><td>Unifying, Bluetooth</td><td><span class="badge badge-ok">Tested</span> on Unifying. Bluetooth needs a tester</td></tr>
+          <tr><th scope="row">MX Master</th><td>Unifying, Bluetooth</td><td><span class="badge">Expected</span> Testers welcome</td></tr>
+          <tr><th scope="row">MX Master 3</th><td>Unifying, Bluetooth</td><td><span class="badge">Expected</span> Testers welcome</td></tr>
+          <tr><th scope="row">MX Master 3S</th><td>Bolt, Bluetooth</td><td><span class="badge">Expected</span> Testers welcome</td></tr>
+          <tr><th scope="row">MX Master 4</th><td>Bolt, Bluetooth</td><td><span class="badge">Expected</span> Testers welcome</td></tr>
+          <tr><th scope="row">MX Anywhere 2, 2S</th><td>Unifying, Bluetooth</td><td><span class="badge">Expected</span> Testers welcome</td></tr>
+          <tr><th scope="row">MX Anywhere 3</th><td>Unifying, Bluetooth</td><td><span class="badge">Expected</span> Testers welcome</td></tr>
+          <tr><th scope="row">MX Anywhere 3S</th><td>Bolt, Bluetooth</td><td><span class="badge">Expected</span> Testers welcome</td></tr>
+          <tr><th scope="row">MX Vertical</th><td>Unifying, Bluetooth</td><td><span class="badge">Expected</span> Testers welcome</td></tr>
+          <tr><th scope="row">MX Ergo</th><td>Unifying, Bluetooth</td><td><span class="badge">Expected</span> Testers welcome</td></tr>
+          <tr><th scope="row">MX Ergo S</th><td>Bolt, Bluetooth</td><td><span class="badge">Expected</span> Testers welcome</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout">
+      <div>
+        <h3>Have one of these mice?</h3>
+        <p>Run the device report and paste the output into a <a href="https://github.com/pughouselabs/omarchy-maestro/issues">GitHub issue</a>. It lists the receiver, features and buttons, and leaves out serial numbers. After a plugin install, the command is in the plugin folder: <code>~/.config/omarchy/plugins/io.github.pughouselabs.maestro/bin/maestro</code>.</p>
+      </div>
+      <div class="cmd cmd-inline" role="group" aria-label="Device report command">
+        <code><span class="prompt" aria-hidden="true">$</span> maestro diagnose --json</code>
+        <button class="cmd-copy" type="button" data-copy="maestro diagnose --json" aria-label="Copy device report command">
+          <svg class="ico" aria-hidden="true"><use href="#i-copy"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-tint" id="install" aria-labelledby="install-title">
+  <div class="wrap">
+    <header class="section-head">
+      <p class="eyebrow">Install</p>
+      <h2 id="install-title">Up and running in a minute.</h2>
+    </header>
+    <div class="install-grid">
+      <article class="panel install-main">
+        <div>
+          <h3>Install with Omarchy</h3>
+          <p>Run this in a terminal. It adds Maestro as a shell plugin and turns on the bar widget.</p>
+          <div class="cmd" role="group" aria-label="Install command">
+            <code><span class="prompt" aria-hidden="true">$</span> omarchy plugin install https://github.com/pughouselabs/omarchy-maestro --enable</code>
+            <button class="cmd-copy" type="button" data-copy="omarchy plugin install https://github.com/pughouselabs/omarchy-maestro --enable" aria-label="Copy install command">
+              <svg class="ico" aria-hidden="true"><use href="#i-copy"/></svg>
+            </button>
+          </div>
+          <p class="fine">Once Maestro is listed in the Omarchy plugin marketplace, you can also install it from there.</p>
+        </div>
+        <div>
+          <h3>Install manually</h3>
+          <pre class="code"><code>git clone https://github.com/pughouselabs/omarchy-maestro ~/src/omarchy-maestro
+ln -s ~/src/omarchy-maestro ~/.config/omarchy/plugins/io.github.pughouselabs.maestro
+omarchy-shell shell rescanPlugins
+omarchy plugin enable io.github.pughouselabs.maestro</code></pre>
+          <p class="fine">Keep the folder in place. Rescanning takes a moment; if enabling fails, wait for <code>omarchy-shell shell listPlugins</code> to list Maestro and try again.</p>
+          <p class="fine">To use button actions, gestures and profiles, start the background service. The <a href="https://github.com/pughouselabs/omarchy-maestro/blob/main/docs/configuration.md#start-locally">setup guide</a> covers the uinput rule and the optional user service.</p>
+        </div>
+      </article>
+      <article class="panel">
+        <h3>Requirements</h3>
+        <ul class="plain">
+          <li>Omarchy with its shell and Hyprland</li>
+          <li>Python 3.10 or newer</li>
+          <li>A Logitech MX mouse on a Unifying or Bolt receiver, or Bluetooth</li>
+          <li>Access to the mouse's <code>/dev/hidraw</code> device. Omarchy grants this for Logitech receivers</li>
+          <li>For button actions and gestures: access to <code>/dev/uinput</code> and the background service</li>
+          <li>Solaar and logiops stopped. One program at a time can control the mouse</li>
+        </ul>
+      </article>
+      <article class="panel">
+        <h3>Remove</h3>
+        <div class="cmd" role="group" aria-label="Remove command">
+          <code><span class="prompt" aria-hidden="true">$</span> omarchy plugin remove io.github.pughouselabs.maestro</code>
+          <button class="cmd-copy" type="button" data-copy="omarchy plugin remove io.github.pughouselabs.maestro" aria-label="Copy remove command">
+            <svg class="ico" aria-hidden="true"><use href="#i-copy"/></svg>
+          </button>
+        </div>
+        <p class="fine">For a manual install, run <code>omarchy plugin disable io.github.pughouselabs.maestro</code>, then <code>unlink ~/.config/omarchy/plugins/io.github.pughouselabs.maestro</code>.</p>
+        <p class="fine">Removing Maestro does not reset the mouse. DPI, SmartShift and scroll direction keep their last values, so set them back first if you want the old ones. Your config and backups stay in <code>~/.config/maestro</code> until you delete them. If you set up the background service, stop and disable it first.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="faq" aria-labelledby="faq-title">
+  <div class="wrap narrow">
+    <header class="section-head">
+      <p class="eyebrow">FAQ</p>
+      <h2 id="faq-title">Questions, answered.</h2>
+    </header>
+    <div class="faq">
+      <details>
+        <summary>Can I use Maestro alongside Solaar or logiops?</summary>
+        <p>Not at the same time. Only one program can own the mouse's HID++ connection. Stop Solaar and logiops, including any autostart entries, before using Maestro. The background service checks for them when it starts and every five seconds after that.</p>
+      </details>
+      <details>
+        <summary>Does it work over Bluetooth?</summary>
+        <p>Maestro supports Bluetooth and verifies the device before it reads or changes anything. So far it has only been tested on an MX Master 2S over a Unifying receiver, so Bluetooth reports from testers are very welcome.</p>
+      </details>
+      <details>
+        <summary>What about the Bolt receiver?</summary>
+        <p>Maestro's device core handles Bolt receivers alongside Unifying, and newer mice such as the MX Master 3S and 4 ship with it. It has not been tested on hardware yet. If you have one, a <code>maestro diagnose --json</code> report helps a lot.</p>
+      </details>
+      <details>
+        <summary>Will it run on GNOME, KDE, Sway or X11?</summary>
+        <p>Omarchy and Hyprland come first. Gestures, window actions and per-app profiles depend on Hyprland, and the background service will not start in other sessions rather than guess at their shortcuts. The code has clean extension points for other desktops, but they are not supported yet.</p>
+      </details>
+      <details>
+        <summary>Does Maestro need root?</summary>
+        <p>No. It runs as your desktop user. It needs access to the mouse's hidraw device, and the background service needs <code>/dev/uinput</code> to send key presses and clicks. The setup guide shows a udev rule that grants this to the logged-in user.</p>
+      </details>
+      <details>
+        <summary>What happens to my mouse if I stop or remove Maestro?</summary>
+        <p>Button remapping is temporary. When the service stops, it returns every control to its normal behavior. Pointer settings such as DPI, SmartShift and scroll direction stay at their current values.</p>
+      </details>
+      <details>
+        <summary>Can I undo a change?</summary>
+        <p>Yes. Every change in the app shows <strong>Saved</strong> with an <strong>Undo</strong> button, and the Backups page restores any of the last 20 saved configurations after asking you to confirm.</p>
+      </details>
+      <details>
+        <summary>How much does it cost?</summary>
+        <p>Nothing. Maestro is free and open source under the MIT license.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="closing" aria-labelledby="closing-title">
+  <div class="wrap">
+    <h2 id="closing-title">Make your MX mouse feel at home.</h2>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#install" data-copy="omarchy plugin install https://github.com/pughouselabs/omarchy-maestro --enable">
+        <svg class="ico" aria-hidden="true"><use href="#i-copy"/></svg>
+        <span class="btn-label">Install for Omarchy</span>
+      </a>
+      <a class="btn btn-ghost" href="https://github.com/pughouselabs/omarchy-maestro">
+        <svg class="ico" aria-hidden="true"><use href="#i-github"/></svg>
+        View on GitHub
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <a class="brand" href="#top">
+        <img src="assets/img/favicon.svg" width="28" height="28" alt="">
+        <span>Maestro</span>
+      </a>
+      <p>Made by Pughouse Labs.</p>
+    </div>
+    <nav class="footer-links" aria-label="Project">
+      <a href="https://github.com/pughouselabs/omarchy-maestro">Source code</a>
+      <a href="https://github.com/pughouselabs/omarchy-maestro/blob/main/CHANGELOG.md">Changelog</a>
+      <a href="https://github.com/pughouselabs/omarchy-maestro/issues">Report an issue</a>
+      <a href="https://github.com/pughouselabs/omarchy-maestro/blob/main/SECURITY.md">Security</a>
+      <a href="https://github.com/pughouselabs/omarchy-maestro/blob/main/LICENSE">MIT license</a>
+      <a href="https://github.com/pughouselabs/maestro-site">Website source</a>
+    </nav>
+    <div class="footer-legal">
+      <p>Code and original interface assets are MIT licensed. MX Master 2S images are rendered from <a href="https://sketchfab.com/3d-models/logitech-mx-master-2s-danish-blends-e8f3235951934a01aba4e0ee3de72e71">Logitech MX master 2S</a> by danish_blends, licensed <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a>, with new lighting and camera. They are not covered by the MIT license and may not be used commercially.</p>
+      <p>Not affiliated with or endorsed by Logitech. Logitech and MX Master are trademarks of their owners.</p>
+    </div>
+  </div>
+</footer>
+
+<p class="sr-only" id="announce" aria-live="polite"></p>
+<script src="assets/site.js" defer></script>
+</body>
+</html>
